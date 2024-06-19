@@ -25,7 +25,7 @@ Compared with previous solutions, DAIL-SQL encodes structure knowledge as SQL st
 ## Environment Setup
 To set up the environment, you should download the [stanford-cornlp](http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip) and unzip it to the folder `./third_party`.
 Next, you need to launch the coreNLP server:
-```coreNLP
+```bash
 apt install default-jre
 apt install default-jdk
 cd third_party/stanford-corenlp-full-2018-10-05
@@ -33,7 +33,7 @@ nohup java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer &
 cd ../../
 ```
 In addition, set up the Python environment:
-```python_env
+```bash
 conda create -n DAIL-SQL python=3.8
 conda activate DAIL-SQL
 python -m pip install --upgrade pip
@@ -47,12 +47,12 @@ You need to download the [Spider](https://yale-lily.github.io/spider) to the fol
 ## Run
 
 ### Data Preprocess
-```
+```bash
 python data_preprocess.py
 ```
 ### Prompt Generation
 Select examples with masked question similarity:
-```
+```bash
 python generate_question.py \
 --data_type spider \
 --split test \
@@ -64,7 +64,7 @@ python generate_question.py \
 --selector_type  EUCDISQUESTIONMASK
 ```
 Select examples considering both question similarity and query similarity:
-```
+```bash
 python generate_question.py \
 --data_type spider \
 --split test \
@@ -79,14 +79,14 @@ python generate_question.py \
 
 ### Calling the LLM
 Without voting:
-```
+```bash
 python ask_llm.py \
 --openai_api_key [your_openai_api_key]  \
 --model gpt-4 \
 --question [prompt_dir]
 ```
 With self-consistency voting:
-```
+```bash
 python ask_llm.py \
 --openai_api_key [your_openai_api_key]  \
 --model gpt-4 \
@@ -97,7 +97,7 @@ python ask_llm.py \
 ```
 
 ### Running Example
-```
+```bash
 bash run_dail_sql_mini.sh [your_openai_api_key]
 ```
 
